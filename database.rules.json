@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "presence": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        "$connectionId": {
+          ".validate": "newData.hasChildren(['name', 'x', 'y'])",
+          "name": { ".validate": "newData.isString() && newData.val().length <= 24" },
+          "x": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100" },
+          "y": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100" },
+          "$other": { ".validate": false }
+        }
+      }
+    }
+  }
+}
